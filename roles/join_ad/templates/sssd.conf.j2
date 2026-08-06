@@ -18,5 +18,8 @@ ldap_id_mapping = True
 use_fully_qualified_names = {{ sssd_use_fully_qualified_names }}
 fallback_homedir = {{ sssd_fallback_homedir }}
 ad_hostname = {{ inventory_hostname_short }}.{{ domain_name }}
-dyndns_update = false 
-
+dyndns_update = true
+dyndns_refresh_interval = 43200
+dyndns_update_ptr = true
+dyndns_ttl = 3600
+dyndns_auth = GSS-TSIG
