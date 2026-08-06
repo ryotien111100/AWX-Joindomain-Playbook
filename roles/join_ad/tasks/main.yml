@@ -16,24 +16,23 @@
       - oddjob
       - oddjob-mkhomedir
       - packagekit
-      - resolvconf
     state: present
     update_cache: true
 
-- name: Enable resolvconf service
-  ansible.builtin.systemd:
-    name: resolvconf.service
-    enabled: true
-    state: started
+- name: Configure static DNS nameservers pointing to AD (systemd-resolved)
+  ansible.builtin.lineinfile:
+    path: /etc/systemd/resolved.conf
+    regexp: '^#?DNS='
+    line: "DNS={{ ad_dns_servers | join(' ') }}"
+    backup: true
+  notify: Restart systemd-resolved
 
-- name: Configure static DNS nameservers pointing to AD
-  ansible.builtin.template:
-    src: resolv_head.j2
-    dest: /etc/resolvconf/resolv.conf.d/head
-    owner: root
-    group: root
-    mode: '0644'
-  notify: Apply resolvconf
+- name: Set DNS search domain to AD domain (systemd-resolved)
+  ansible.builtin.lineinfile:
+    path: /etc/systemd/resolved.conf
+    regexp: '^#?Domains='
+    line: "Domains={{ domain_name }}"
+  notify: Restart systemd-resolved
 
 - name: Flush handlers so DNS is applied before realm join
   ansible.builtin.meta: flush_handlers
