@@ -1,6 +1,6 @@
 ---
 - name: Join Ubuntu servers to Active Directory (vnsp.local)
-  hosts: linux_servers
+  hosts: all
   become: true
   gather_facts: true
   strategy: free
