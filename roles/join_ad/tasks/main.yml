@@ -3,11 +3,17 @@
   ansible.builtin.hostname:
     name: "{{ ansible_facts['hostname'] }}.{{ domain_name }}"
 
-- name: Ensure /etc/hosts has FQDN + short name on the 127.0.1.1 line
+- name: Ensure 127.0.1.1 line has FQDN + short hostname
   ansible.builtin.lineinfile:
     path: /etc/hosts
     regexp: '^127\.0\.1\.1\s'
     line: "127.0.1.1 {{ ansible_facts['hostname'] }}.{{ domain_name }} {{ ansible_facts['hostname'] }}"
+
+- name: Ensure 127.0.0.1 line stays as localhost
+  ansible.builtin.lineinfile:
+    path: /etc/hosts
+    regexp: '^127\.0\.0\.1\s'
+    line: "127.0.0.1 localhost"
     
 - name: Install required packages for AD join
   ansible.builtin.apt:
