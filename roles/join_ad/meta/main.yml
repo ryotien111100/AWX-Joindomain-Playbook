@@ -1,0 +1,17 @@
+---
+galaxy_info:
+  author: your-name
+  description: Join Ubuntu 22.04 servers to Active Directory (vnsp.local)
+  license: MIT
+  min_ansible_version: "2.14"
+  platforms:
+    - name: Ubuntu
+      versions:
+        - jammy
+  galaxy_tags:
+    - system
+    - activedirectory
+    - sssd
+    - realmd
+
+dependencies: []

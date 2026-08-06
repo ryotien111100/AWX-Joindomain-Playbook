@@ -1,0 +1,25 @@
+{# managed by Ansible - role join_ad #}
+[sssd]
+domains = {{ domain_name }}
+config_file_version = 2
+services = nss, pam
+default_domain_suffix = {{ domain_name }}
+
+[domain/{{ domain_name }}]
+ad_domain = {{ domain_name }}
+krb5_realm = {{ domain_name | upper }}
+realmd_tags = manages-system joined-with-adcli
+cache_credentials = {{ sssd_cache_credentials }}
+id_provider = ad
+access_provider = ad
+krb5_store_password_if_offline = True
+default_shell = {{ sssd_default_shell }}
+ldap_id_mapping = True
+use_fully_qualified_names = {{ sssd_use_fully_qualified_names }}
+fallback_homedir = {{ sssd_fallback_homedir }}
+ad_hostname = {{ inventory_hostname_short }}.{{ domain_name }}
+dyndns_update = true
+dyndns_refresh_interval = 43200
+dyndns_update_ptr = true
+dyndns_ttl = 3600
+dyndns_auth = GSS-TSIG

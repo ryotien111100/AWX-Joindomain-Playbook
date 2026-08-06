@@ -1,0 +1,4 @@
+{# managed by Ansible - role join_ad #}
+{% for ns in ad_dns_servers %}
+nameserver {{ ns }}
+{% endfor %}

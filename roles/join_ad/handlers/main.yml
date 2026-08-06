@@ -1,0 +1,10 @@
+---
+- name: Apply resolvconf
+  ansible.builtin.command: resolvconf -u
+  listen: Apply resolvconf
+
+- name: Restart sssd
+  ansible.builtin.systemd:
+    name: sssd.service
+    state: restarted
+  listen: Restart sssd

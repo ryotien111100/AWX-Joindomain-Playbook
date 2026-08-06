@@ -1,0 +1,4 @@
+---
+# Copy file này thành group_vars/all/vault.yml, điền mật khẩu thật,
+# rồi chạy: ansible-vault encrypt group_vars/all/vault.yml
+join_password: "CHANGE_ME"

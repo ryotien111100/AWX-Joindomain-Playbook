@@ -1,0 +1,23 @@
+---
+- name: Join Ubuntu servers to Active Directory (vnsp.local)
+  hosts: linux_servers
+  become: true
+  gather_facts: true
+  strategy: free
+
+  pre_tasks:
+    - name: Update apt cache and upgrade all packages
+      ansible.builtin.apt:
+        update_cache: true
+        upgrade: dist
+        cache_valid_time: 3600
+        force_apt_get: true
+
+  roles:
+    - join_ad
+
+  post_tasks:
+    - name: Disable direct root login
+      ansible.builtin.user:
+        name: root
+        password: '!'

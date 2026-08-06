@@ -1,0 +1,7 @@
+*.retry
+.vault_pass
+*.pem
+group_vars/all/vault.yml
+*.log
+__pycache__/
+.DS_Store

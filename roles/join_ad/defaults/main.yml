@@ -1,0 +1,6 @@
+---
+# Có thể override ở group_vars/host_vars nếu cần
+sssd_cache_credentials: True
+sssd_use_fully_qualified_names: True
+sssd_fallback_homedir: "/home/%u@%d"
+sssd_default_shell: /bin/bash

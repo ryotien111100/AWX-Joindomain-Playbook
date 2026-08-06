@@ -1,0 +1,18 @@
+---
+# Domain / AD
+domain_name: vnsp.local
+
+ad_dns_servers:
+  - 110.180.20.101
+  - 110.180.20.102
+  - 110.180.20.100
+
+# Tài khoản dùng để join domain (mật khẩu nằm trong vault.yml -> biến join_password)
+join_user: helpdesk
+
+# Group AD được phép login vào server + có sudo NOPASSWD
+group_permit_login: devops@vnsp.local
+
+# Danh sách user/UPN AD được cấp sudo NOPASSWD riêng lẻ (ngoài group ở trên)
+sudo_admin_users:
+  - rocketor.vn@vnsp.local
