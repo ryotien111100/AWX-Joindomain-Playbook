@@ -1,8 +1,14 @@
 ---
-- name: Set hostname (FQDN)
+- name: Set hostname (FQDN, based on VM's real current hostname)
   ansible.builtin.hostname:
-    name: "{{ inventory_hostname_short }}.{{ domain_name }}"
+    name: "{{ ansible_facts['hostname'] }}.{{ domain_name }}"
 
+- name: Ensure /etc/hosts has FQDN + short name on the 127.0.1.1 line
+  ansible.builtin.lineinfile:
+    path: /etc/hosts
+    regexp: '^127\.0\.1\.1\s'
+    line: "127.0.1.1 {{ ansible_facts['hostname'] }}.{{ domain_name }} {{ ansible_facts['hostname'] }}"
+    
 - name: Install required packages for AD join
   ansible.builtin.apt:
     name:

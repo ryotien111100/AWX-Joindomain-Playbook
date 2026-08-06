@@ -6,7 +6,7 @@ services = nss, pam
 default_domain_suffix = {{ domain_name }}
 
 [domain/{{ domain_name }}]
-ad_domain = {{ domain_name }}
+ad_hostname = {{ ansible_facts['hostname'] }}.{{ domain_name }}
 krb5_realm = {{ domain_name | upper }}
 realmd_tags = manages-system joined-with-adcli
 cache_credentials = {{ sssd_cache_credentials }}
