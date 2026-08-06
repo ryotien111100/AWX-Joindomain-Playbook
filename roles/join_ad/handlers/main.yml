@@ -1,7 +1,9 @@
 ---
-- name: Apply resolvconf
-  ansible.builtin.command: resolvconf -u
-  listen: Apply resolvconf
+- name: Restart systemd-resolved
+  ansible.builtin.systemd:
+    name: systemd-resolved
+    state: restarted
+  listen: Restart systemd-resolved
 
 - name: Restart sssd
   ansible.builtin.systemd:
