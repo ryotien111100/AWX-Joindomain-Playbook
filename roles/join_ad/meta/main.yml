@@ -1,7 +1,7 @@
 ---
 galaxy_info:
   author: your-name
-  description: Join Ubuntu 22.04 servers to Active Directory (vnsp.local)
+  description: Join Ubuntu 22.04 servers to Active Directory (lsx.local)
   license: MIT
   min_ansible_version: "2.14"
   platforms:
